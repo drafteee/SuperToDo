@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'leads.apps.LeadsConfig',
-    'corsheaders',  
+    'corsheaders',
     'rest_framework',
     'todo',
 ]
