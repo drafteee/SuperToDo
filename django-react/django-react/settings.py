@@ -91,6 +91,7 @@ DATABASES = {
 
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
+
 # REST_FRAMEWORK = {
 #     'DEFAULT_RENDERER_CLASSES': (
 #         'rest_framework.renderers.JSONRenderer',
