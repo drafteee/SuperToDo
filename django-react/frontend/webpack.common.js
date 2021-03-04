@@ -7,13 +7,14 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 
 module.exports = {
+  target: 'web',
   devServer: {
     historyApiFallback: true,
   },
   resolve: {
     alias: {
       'react-spring/renderprops$': 'react-spring/renderprops.cjs',
-
+      'react-dom': '@hot-loader/react-dom'
     }
   },
   entry: {
@@ -23,7 +24,7 @@ module.exports = {
       'react',
       'redux',
     ],
-    app: './src/index.js'
+    app: ['react-hot-loader/patch', './src']
   },
   output: {
     filename: '[name].[hash:8].js',

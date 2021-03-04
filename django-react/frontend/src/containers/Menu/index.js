@@ -1,5 +1,5 @@
 import React, {
-  useRef, useState
+  useRef, useState, useEffect
 } from 'react'
 import {
   FontAwesomeIcon
@@ -7,7 +7,6 @@ import {
 import {
   faHome, faLanguage, faUtensils, faCalendar, faBullseye, faCogs
 } from '@fortawesome/free-solid-svg-icons'
-
 import {
   animated,
   useSpring,
@@ -15,6 +14,9 @@ import {
   useChain
 } from 'react-spring'
 import './style.css'
+import {
+  Link, useRouteMatch
+} from 'react-router-dom'
 
 const menuItems = [
   faHome,
@@ -25,10 +27,23 @@ const menuItems = [
   faCogs
 ]
 
-const Menu = ({
-  springsRef
-}) => {
+const menuNames = [
+  '/',
+  '/language',
+  '/food',
+  '/calendar',
+  '/goals',
+  '/settings'
+]
 
+const Menu = ({
+  springsRef, ...props
+}) => {
+  const location = useRouteMatch('/:slug')
+
+  const [current, setCurr] = useState(location ? menuNames.findIndex(x => x === location.url) : 0)
+
+  //#region Animation
   const [cancelAnim, setCA] = useState(false)
 
   const delayValue = 40
@@ -51,14 +66,14 @@ const Menu = ({
       }
     }))
   )
-
+  //#endregion
 
   return (
     <ul className='menu'>{springs.map(({
       x, y, ...props
     }, i) => (
       <animated.li
-        className={`radius_menu ${i === 0 && cancelAnim ? 'selected ' : ''}`}
+        className={`radius_menu ${i === current && cancelAnim ? 'selected ' : ''}`}
         key={i}
         style={{
           transform: x.interpolate((x) => `translateX(${x})`),
@@ -66,10 +81,15 @@ const Menu = ({
           ...props
         }}
       >
-        <FontAwesomeIcon
-          icon={menuItems[i]}
-          inverse={i === 0 ? true : false}
-        />
+        <Link
+          to={menuNames[i]}
+          onClick={() => setCurr(i)}>
+          <FontAwesomeIcon
+            icon={menuItems[i]}
+            inverse={i === current ? true : false}
+          />
+        </Link>
+
       </animated.li>
     ))}
     </ul>

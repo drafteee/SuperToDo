@@ -109,34 +109,37 @@ const App = (props) => {
           ...springProps,
           ...springProps2
         }}>
-        <Header className='header'>
-          <animated.div
-            className='header_menu'
-            style={springPropsC}>
-            <animated.div
-              className='logo'
-              style={springPropsL}>
-              <span className='back_logo radius_menu'>
-                <FontAwesomeIcon
-                  icon={faCalendarDay}
-                  style={{
-                    fontSize: '36px'
-                  }}
-                />
-              </span>
+        <Router history={history}>
 
+          <Header className='header'>
+            <animated.div
+              className='header_menu'
+              style={springPropsC}>
+              <animated.div
+                className='logo'
+                style={springPropsL}>
+                <span className='back_logo radius_menu'>
+                  <FontAwesomeIcon
+                    icon={faCalendarDay}
+                    style={{
+                      fontSize: '36px'
+                    }}
+                  />
+                </span>
+
+              </animated.div>
+              <Menu springsRef={springsRef} />
             </animated.div>
-            <Menu springsRef={springsRef} />
-          </animated.div>
-          <Content className='main_content'>
-            <ObserveInfo />
-            <Router history={history}>
+            <Content className='main_content'>
+              <ObserveInfo />
 
               <Routes />
-            </Router>
-          </Content>
-        </Header>
+            </Content>
+          </Header>
+        </Router>
+
       </animated.div>
+
     </Layout>
   )
 }
