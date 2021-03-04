@@ -13,12 +13,12 @@ module.exports = {
   resolve: {
     alias: {
       'react-spring/renderprops$': 'react-spring/renderprops.cjs',
-            
+
     }
   },
   entry: {
-    commons: ['react',"core-js/modules/es.promise",
-    "core-js/modules/es.array.iterator"],
+    commons: ['react', 'core-js/modules/es.promise',
+      'core-js/modules/es.array.iterator'],
     vendor: [
       'react',
       'redux',
@@ -34,26 +34,26 @@ module.exports = {
   },
   module: {
     rules: [
-        {
-            test: /\.less$/,
-            use: [{
-              loader: 'style-loader',
-            }, {
-              loader: 'css-loader', // translates CSS into CommonJS
-            }, {
-              loader: 'less-loader', // compiles Less to CSS
-             options: {
-              //  modifyVars: {
-              //    'primary-color': '#1DA57A',
-              //    'link-color': '#1DA57A',
-              //    'border-radius-base': '2px',
-              //   //  // or
-              //   //  'hack': `true; @import "global.less";`, // Override with less file
-              //  },
-               javascriptEnabled: true,
-             },
-            }]
-        },
+      {
+        test: /\.less$/,
+        use: [{
+          loader: 'style-loader',
+        }, {
+          loader: 'css-loader', // translates CSS into CommonJS
+        }, {
+          loader: 'less-loader', // compiles Less to CSS
+          options: {
+            //  modifyVars: {
+            //    'primary-color': '#1DA57A',
+            //    'link-color': '#1DA57A',
+            //    'border-radius-base': '2px',
+            //   //  // or
+            //   //  'hack': `true; @import "global.less";`, // Override with less file
+            //  },
+            javascriptEnabled: true,
+          },
+        }]
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -65,7 +65,9 @@ module.exports = {
         test: /\.html$/,
         use: [{
           loader: 'html-loader',
-          options: { minimize: true }
+          options: {
+            minimize: true
+          }
         }]
       },
       {
@@ -90,7 +92,10 @@ module.exports = {
     //   chunkFilename: '[id].css'
     // }),
     new CopyWebpackPlugin([
-      { from: 'public/', to: 'img/' }
+      {
+        from: 'public/',
+        to: 'img/'
+      }
     ]),
     //создание .gz файлов
     new CompressionPlugin({

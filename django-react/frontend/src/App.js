@@ -3,12 +3,23 @@ import React, {
   useRef
 } from 'react'
 import {
+  Router
+} from 'react-router-dom'
+import {
+  hot, setConfig
+} from 'react-hot-loader/root'
+import {
+  Layout
+} from 'antd'
+
+//#region fontIcon
+import {
   FontAwesomeIcon
 } from '@fortawesome/react-fontawesome'
 import {
   faCalendarDay
 } from '@fortawesome/free-solid-svg-icons'
-
+//#endregion
 
 import {
   animated,
@@ -16,34 +27,21 @@ import {
   useSprings,
   useChain
 } from 'react-spring'
-import {
-  Layout
-} from 'antd'
-import './App.css'
-import {
-  Header
-} from 'antd/lib/layout/layout'
+import history from './helpers/history'
+
 import Menu from './containers/Menu'
 import ObserveInfo from './containers/ObserveInfo'
+import Routes from './routes'
+import './App.css'
+
 const {
-  Content
+  Content, Header
 } = Layout
 
 
 const App = (props) => {
 
-  const springRef = useRef()
-
-  const {
-    ...springProp
-  } = useSpring({
-    ref: springRef,
-    overflow: 'auto',
-    from: {
-      overflow: 'hidden',
-    }
-  })
-
+  //#region springAppAnimation
   const springRefM = useRef()
 
   const {
@@ -96,6 +94,8 @@ const App = (props) => {
   useChain(
     [springRefM, springRefM2, springRefC, springRefL, springsRef], [0, 0.5, 0.8, 1, 1]
   )
+  //#endregion
+
   return (
     <Layout
       style={{
@@ -130,7 +130,10 @@ const App = (props) => {
           </animated.div>
           <Content className='main_content'>
             <ObserveInfo />
-            <div />
+            <Router history={history}>
+
+              <Routes />
+            </Router>
           </Content>
         </Header>
       </animated.div>
@@ -138,4 +141,4 @@ const App = (props) => {
   )
 }
 
-export default App
+export default hot(App)

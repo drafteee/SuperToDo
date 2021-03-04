@@ -68,6 +68,7 @@ const Menu = ({
       >
         <FontAwesomeIcon
           icon={menuItems[i]}
+          inverse={i === 0 ? true : false}
         />
       </animated.li>
     ))}

@@ -1,7 +1,9 @@
 .row_observe {
   display: flex;
   justify-content: space-between;
-  height: 100px;
+  height: 120px;
+  margin-bottom: 20px;
+  border-bottom: solid 1px #dfe1e6;
 }
 
 .overview {
@@ -39,7 +41,7 @@
 }
 
 .account div {
-  width: 40px;
+  width: 50px;
   border-radius: 10px;
   text-align: center;
   background-color: darkkhaki;

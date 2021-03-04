@@ -40,6 +40,7 @@
 
 .menu>li:hover {
   background: rgba(144, 169, 216, 0.438);
+  cursor: pointer;
 }
 
 .menu>li:active {
