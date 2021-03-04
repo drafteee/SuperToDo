@@ -1,9 +1,12 @@
 {
   "env": {
+    "node": true,
     "browser": true,
     "es6": true
   },
-  "extends": [],
+  "extends": [
+    "eslint:recommended"
+  ],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -16,44 +19,97 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier","react-hooks"],
+  "plugins": [
+    "react",
+    "prettier",
+    "react-hooks"
+  ],
   "rules": {
-    "jsx-quotes": ["error", "prefer-single"],
+    "jsx-quotes": [
+      "error",
+      "prefer-single"
+    ],
     "react/jsx-boolean-value": "error",
-    "react/jsx-closing-bracket-location": ["error", "tag-aligned"],
+    // "react/jsx-closing-bracket-location": ["error", "tag-aligned"],
     "react/jsx-closing-tag-location": "error",
     "react/jsx-curly-brace-presence": [
       "error",
-      { "props": "never", "children": "never" }
+      {
+        "props": "never",
+        "children": "never"
+      }
     ],
     "react/jsx-curly-newline": [
       "error",
-      { "multiline": "consistent", "singleline": "consistent" }
-    ],
-    "react/jsx-curly-spacing": [
-      "error",
       {
-        "attributes": { "when": "never" },
-        "children": { "when": "never" },
-        "allowMultiline": true
+        "multiline": "consistent",
+        "singleline": "consistent"
       }
     ],
-    "react/jsx-equals-spacing": ["error", "never"],
-    "react/jsx-first-prop-new-line": ["error", "multiline-multiprop"],
-    "react/jsx-fragments": ["error", "syntax"],
+    // "react/jsx-curly-spacing": [
+    //   "error",
+    //   {
+    //     "attributes": {
+    //       "when": "always"
+    //     },
+    //     "children": {
+    //       "when": "always"
+    //     },
+    //     "allowMultiline": true
+    //   }
+    // ],
+    "react/jsx-equals-spacing": [
+      "error",
+      "never"
+    ],
+    "react/jsx-first-prop-new-line": [
+      1,
+      "multiline"
+    ],
+    "react/jsx-max-props-per-line": [
+      1,
+      {
+        "maximum": 1
+      }
+    ],
+    "react/jsx-fragments": [
+      "error",
+      "syntax"
+    ],
     "react/jsx-handler-names": "error",
     "react/jsx-indent": [
       "error",
       2,
-      { "checkAttributes": true, "indentLogicalExpressions": true }
+      {
+        "checkAttributes": true,
+        "indentLogicalExpressions": false
+      }
     ],
-    "react/jsx-indent-props": ["error", 2],
-    "react/jsx-key": "error",
+    "react/jsx-indent-props": [
+      "error",
+      2
+    ],
+    // "react/jsx-key": "warn",
     "react/jsx-no-comment-textnodes": "error",
     "react/jsx-no-duplicate-props": "error",
-    "react/jsx-no-target-blank": ["error", { "enforceDynamicLinks": "always" }],
-    "react/jsx-no-undef": "error",
-    "react/jsx-pascal-case": ["error", { "allowAllCaps": false }],
+    "react/jsx-no-target-blank": [
+      "error",
+      {
+        "enforceDynamicLinks": "always"
+      }
+    ],
+    "react/jsx-no-undef": [
+      "error",
+      {
+        "allowGlobals": false
+      }
+    ],
+    "react/jsx-pascal-case": [
+      "error",
+      {
+        "allowAllCaps": false
+      }
+    ],
     "react/jsx-props-no-multi-spaces": "error",
     "react/jsx-tag-spacing": [
       "error",
@@ -67,19 +123,65 @@
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "react/self-closing-comp": "error",
-    "array-bracket-spacing": ["error", "always", { "objectsInArrays": false }],
+    // "array-bracket-spacing": [
+    //   "error",
+    //   "always",
+    //   {
+    //     "objectsInArrays": false
+    //   }
+    // ],
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
     "object-property-newline": "error",
-    // "array-bracket-newline": ["error", "always"],
-    "indent": ["error", 2, { "SwitchCase": 1}],
-    "linebreak-style": ["error", "windows"],
-    "quotes": ["error", "single"],
-    "semi": ["error", "never"],
-    "react/no-unescaped-entities": [
+    "object-curly-newline": [
       "error",
       {
-        "forbid": [">", "}"]
+        // "ObjectExpression": "always",
+        // "ObjectPattern": "always",
+        // "ImportDeclaration": "always",
+        "minProperties": 1
       }
     ],
+    // "array-bracket-newline": ["error", "always"],
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    //"linebreak-style": ["error", "windows"],
+    "key-spacing": [
+      "error",
+      {
+        "afterColon": true
+      }
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "never"
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "local",
+        "args": "none",
+        "ignoreRestSiblings": true
+      }
+    ],
+    // "multiline-ternary": ["error", "always"],
+    // "react/no-unescaped-entities": [
+    //   "error",
+    //   {
+    //     "forbid": [">", "}"]
+    //   }
+    // ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn"
   }
