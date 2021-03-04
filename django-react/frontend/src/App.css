@@ -40,6 +40,30 @@
   border-radius: 10px;
 }
 
+.close_menu {
+  width: 20px;
+  height: 36px;
+  position: absolute;
+  display: flex;
+  left: 1%;
+  top: calc(50% - 18px);
+  border-radius: 50% 0% 0% 50%;
+  border: 1px solid white;
+  /* text-align: center; */
+  justify-content: center;
+  align-items: center;
+}
+
+.close_menu:hover {
+  cursor: pointer;
+  background-color: rgb(158, 157, 157);
+  transition: background-color 0.8s ease;
+}
+
+.close_menu::after {
+  content: '';
+}
+
 .back_logo {
   display: flex;
   justify-content: center;

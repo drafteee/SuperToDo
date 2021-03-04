@@ -17,7 +17,7 @@ import {
   FontAwesomeIcon
 } from '@fortawesome/react-fontawesome'
 import {
-  faCalendarDay
+  faCalendarDay, faChevronLeft, faChevronRight
 } from '@fortawesome/free-solid-svg-icons'
 //#endregion
 
@@ -40,8 +40,21 @@ const {
 
 
 const App = (props) => {
-
+  const [closeMenu, setcloseMenu] = useState(false)
   //#region springAppAnimation
+
+  const springRefA = useRef()
+
+  const {
+    ...springPropsA
+  } = useSpring({
+    ref: springRefA,
+    display: 'flex',
+    from: {
+      display: 'none',
+    }
+  })
+
   const springRefM = useRef()
 
   const {
@@ -71,9 +84,11 @@ const App = (props) => {
     ...springPropsC
   } = useSpring({
     ref: springRefC,
-    width: '100px',
+    width: closeMenu ? '0px' : '100px',
+    //display: closeMenu ? 'none' : 'flex',
     from: {
-      width: '0px'
+      width: '0px',
+      //display: 'none'
     }
   })
 
@@ -92,7 +107,7 @@ const App = (props) => {
   const springsRef = useRef()
 
   useChain(
-    [springRefM, springRefM2, springRefC, springRefL, springsRef], [0, 0.5, 0.8, 1, 1]
+    [springRefM, springRefM2, springRefC, springRefL, springsRef, springRefA], [0, 0.5, 0.8, 1, 1, 1]
   )
   //#endregion
 
@@ -110,7 +125,14 @@ const App = (props) => {
           ...springProps2
         }}>
         <Router history={history}>
-
+          <animated.div
+            style={springPropsA}
+            className='close_menu'
+            onClick={() => setcloseMenu(state => !state)}>
+            <FontAwesomeIcon
+              icon={closeMenu ? faChevronLeft : faChevronRight}
+            />
+          </animated.div>
           <Header className='header'>
             <animated.div
               className='header_menu'
@@ -118,7 +140,11 @@ const App = (props) => {
               <animated.div
                 className='logo'
                 style={springPropsL}>
-                <span className='back_logo radius_menu'>
+                <span
+                  className='back_logo radius_menu'
+                  style={{
+                    display: closeMenu ? 'none' : 'flex'
+                  }}>
                   <FontAwesomeIcon
                     icon={faCalendarDay}
                     style={{
