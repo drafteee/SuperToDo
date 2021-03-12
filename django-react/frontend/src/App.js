@@ -1,6 +1,7 @@
 import React, {
   useState,
-  useRef
+  useRef,
+  useEffect
 } from 'react'
 import {
   Router
@@ -11,7 +12,9 @@ import {
 import {
   Layout
 } from 'antd'
-
+import {
+  useSelector
+} from 'react-redux'
 //#region fontIcon
 import {
   FontAwesomeIcon
@@ -42,6 +45,32 @@ const {
 const App = (props) => {
   const [closeMenu, setcloseMenu] = useState(false)
   //#region springAppAnimation
+  const selectedData = useSelector(state => state.notifyReducer)
+  const [colorProps, set, stop] = useSpring(() => ({
+    from: {
+      background: 'white'
+    },
+    to: async next => {
+      while (selectedData.messages !== null) {
+        await next({
+          background: 'lightgoldenrodyellow'
+        })
+        await next({
+          background: 'lightpink'
+        })
+        await next({
+          background: 'lightcoral'
+        })
+      }
+    },
+  }))
+  console.log(selectedData, colorProps)
+
+  // useEffect(() => {
+  //   return () => {
+  //     stop()
+  //   }
+  // }, [stop])
 
   const springRefA = useRef()
 
@@ -111,6 +140,7 @@ const App = (props) => {
   )
   //#endregion
 
+
   return (
     <Layout
       style={{
@@ -122,7 +152,8 @@ const App = (props) => {
         className='notify_border'
         style={{
           ...springProps,
-          ...springProps2
+          ...springProps2,
+          ...colorProps
         }}>
         <Router history={history}>
           <animated.div
@@ -130,7 +161,7 @@ const App = (props) => {
             className='close_menu'
             onClick={() => setcloseMenu(state => !state)}>
             <FontAwesomeIcon
-              icon={closeMenu ? faChevronLeft : faChevronRight}
+              icon={!closeMenu ? faChevronLeft : faChevronRight}
             />
           </animated.div>
           <Header className='header'>
