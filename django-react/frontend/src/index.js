@@ -9,14 +9,18 @@ import './index.css'
 import App from './App'
 import {
   Provider
-} from 'react-redux'
-import store from './store'
+} from 'mobx-react'
+// import {
+//   Provider
+// } from 'react-redux'
+//import store from './store'
+import stores from './mobx-stores'
 import reportWebVitals from './reportWebVitals'
 
 
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider rootStore={stores}>
     <App />
   </Provider>,
   document.getElementById('root')

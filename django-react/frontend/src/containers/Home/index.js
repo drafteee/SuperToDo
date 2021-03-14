@@ -1,11 +1,16 @@
-import React from 'react'
-const Home = () => {
+import React, {
+  memo
+} from 'react'
+import Dictionary from '../../components/Dictionary'
+
+const Home = memo(() => {
   return (
     <div>
-      Home
+
+      <Dictionary />
     </div>
   )
-}
+})
 
 
 export default Home

@@ -1,7 +1,8 @@
 import React, {
   useState,
   useRef,
-  useEffect
+  useEffect,
+  memo
 } from 'react'
 import {
   Router
@@ -44,27 +45,33 @@ const {
 
 const App = (props) => {
   const [closeMenu, setcloseMenu] = useState(false)
+  // const selectedData = useSelector(state => state.notifyReducer)
+
   //#region springAppAnimation
-  const selectedData = useSelector(state => state.notifyReducer)
-  const [colorProps, set, stop] = useSpring(() => ({
-    from: {
-      background: 'white'
-    },
-    to: async next => {
-      while (selectedData.messages !== null) {
-        await next({
-          background: 'lightgoldenrodyellow'
-        })
-        await next({
-          background: 'lightpink'
-        })
-        await next({
-          background: 'lightcoral'
-        })
-      }
-    },
-  }))
-  console.log(selectedData, colorProps)
+  // const [colorProps, set, stop] = useSpring(() => ({
+  //   from: {
+  //     background: 'white'
+  //   },
+  //   to: async next => {
+  //     while (!selectedData.isEmpty) {
+  //       if (selectedData.messages)
+  //         await next({
+  //           background: 'lightgoldenrodyellow'
+  //         })
+
+  //       if (selectedData.timeouts)
+  //         await next({
+  //           background: 'lightpink'
+  //         })
+
+  //       if (selectedData.reminders)
+  //         await next({
+  //           background: 'lightcoral'
+  //         })
+  //     }
+  //   },
+  // }))
+  // console.log(selectedData, colorProps)
 
   // useEffect(() => {
   //   return () => {
@@ -153,7 +160,7 @@ const App = (props) => {
         style={{
           ...springProps,
           ...springProps2,
-          ...colorProps
+          // ...colorProps
         }}>
         <Router history={history}>
           <animated.div
@@ -164,35 +171,38 @@ const App = (props) => {
               icon={!closeMenu ? faChevronLeft : faChevronRight}
             />
           </animated.div>
-          <Header className='header'>
-            <animated.div
-              className='header_menu'
-              style={springPropsC}>
+          <div className='background'>
+            <Header className='header'>
               <animated.div
-                className='logo'
-                style={springPropsL}>
-                <span
-                  className='back_logo radius_menu'
-                  style={{
-                    display: closeMenu ? 'none' : 'flex'
-                  }}>
-                  <FontAwesomeIcon
-                    icon={faCalendarDay}
+                className='header_menu'
+                style={springPropsC}>
+                <animated.div
+                  className='logo'
+                  style={springPropsL}>
+                  <span
+                    className='back_logo radius_menu'
                     style={{
-                      fontSize: '36px'
-                    }}
-                  />
-                </span>
+                      display: closeMenu ? 'none' : 'flex'
+                    }}>
+                    <FontAwesomeIcon
+                      icon={faCalendarDay}
+                      style={{
+                        fontSize: '36px'
+                      }}
+                    />
+                  </span>
 
+                </animated.div>
+                <Menu springsRef={springsRef} />
               </animated.div>
-              <Menu springsRef={springsRef} />
-            </animated.div>
+            </Header>
             <Content className='main_content'>
-              <ObserveInfo />
+              {/* <ObserveInfo data={selectedData} /> */}
 
               <Routes />
             </Content>
-          </Header>
+          </div>
+
         </Router>
 
       </animated.div>

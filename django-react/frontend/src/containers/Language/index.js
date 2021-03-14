@@ -1,6 +1,10 @@
 import React from 'react'
+import {
+  inject, observer
+} from 'mobx-react'
 
-const Language = () => {
+const Language = (props) => {
+  console.log(props)
   return (
     <div>
       Language
@@ -8,4 +12,6 @@ const Language = () => {
   )
 }
 
-export default Language
+export default inject(stores => ({
+  EnglishStore: stores.rootStore.englishStore
+}))(observer(Language))

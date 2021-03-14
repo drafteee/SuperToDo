@@ -1,5 +1,5 @@
 export const notifyConstants = {
-  SUCCESS: 'ALERT_SUCCESS',
-  ERROR: 'ALERT_ERROR',
+  ADD_MESSAGE: 'ADD_MESSAGE',
+  ADD_TIMEOUT: 'ADD_TIMEOUT',
   CLEAR: 'ALERT_CLEAR'
 }
