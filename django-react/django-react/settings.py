@@ -37,10 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'leads.apps.LeadsConfig',
     'corsheaders',
     'rest_framework',
-    'todo',
+    'languageDictionary'
 ]
 
 MIDDLEWARE = [
@@ -53,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'django-react.urls'
 
 TEMPLATES = [

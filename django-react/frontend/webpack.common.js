@@ -8,6 +8,9 @@ const CompressionPlugin = require('compression-webpack-plugin')
 
 module.exports = {
   target: 'web',
+  performance: {
+    hints: 'warning',
+  },
   devServer: {
     historyApiFallback: true,
   },

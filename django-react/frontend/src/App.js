@@ -16,6 +16,9 @@ import {
 import {
   useSelector
 } from 'react-redux'
+import {
+  inject, observer
+} from 'mobx-react'
 //#region fontIcon
 import {
   FontAwesomeIcon
@@ -43,34 +46,36 @@ const {
 } = Layout
 
 
-const App = (props) => {
+const App = ({
+  NotifyStore
+}) => {
   const [closeMenu, setcloseMenu] = useState(false)
-  // const selectedData = useSelector(state => state.notifyReducer)
 
   //#region springAppAnimation
-  // const [colorProps, set, stop] = useSpring(() => ({
-  //   from: {
-  //     background: 'white'
-  //   },
-  //   to: async next => {
-  //     while (!selectedData.isEmpty) {
-  //       if (selectedData.messages)
-  //         await next({
-  //           background: 'lightgoldenrodyellow'
-  //         })
 
-  //       if (selectedData.timeouts)
-  //         await next({
-  //           background: 'lightpink'
-  //         })
+  const [colorProps, set, stop] = useSpring(() => ({
+    from: {
+      background: 'white'
+    },
+    to: async next => {
+      while (!NotifyStore.isEmpty) {
+        if (NotifyStore.messages)
+          await next({
+            background: 'lightgoldenrodyellow'
+          })
 
-  //       if (selectedData.reminders)
-  //         await next({
-  //           background: 'lightcoral'
-  //         })
-  //     }
-  //   },
-  // }))
+        if (NotifyStore.timeouts)
+          await next({
+            background: 'lightpink'
+          })
+
+        if (NotifyStore.reminders)
+          await next({
+            background: 'lightcoral'
+          })
+      }
+    },
+  }))
   // console.log(selectedData, colorProps)
 
   // useEffect(() => {
@@ -145,6 +150,7 @@ const App = (props) => {
   useChain(
     [springRefM, springRefM2, springRefC, springRefL, springsRef, springRefA], [0, 0.5, 0.8, 1, 1, 1]
   )
+
   //#endregion
 
 
@@ -160,7 +166,7 @@ const App = (props) => {
         style={{
           ...springProps,
           ...springProps2,
-          // ...colorProps
+          ...colorProps
         }}>
         <Router history={history}>
           <animated.div
@@ -197,7 +203,7 @@ const App = (props) => {
               </animated.div>
             </Header>
             <Content className='main_content'>
-              {/* <ObserveInfo data={selectedData} /> */}
+              <ObserveInfo data={NotifyStore} />
 
               <Routes />
             </Content>
@@ -211,4 +217,6 @@ const App = (props) => {
   )
 }
 
-export default hot(App)
+export default inject(stores => ({
+  NotifyStore: stores.rootStore.notifyStore
+}))(observer(hot(App)))

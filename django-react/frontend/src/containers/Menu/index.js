@@ -17,6 +17,11 @@ import './style.css'
 import {
   Link, useRouteMatch
 } from 'react-router-dom'
+import {
+  Button
+} from 'antd'
+var qs = require('qs')
+import axios from 'axios'
 
 const menuItems = [
   faHome,
@@ -69,30 +74,40 @@ const Menu = ({
   //#endregion
 
   return (
-    <ul className='menu'>{springs.map(({
-      x, y, ...props
-    }, i) => (
-      <animated.li
-        className={`radius_menu ${i === current && cancelAnim ? 'selected ' : ''}`}
-        key={i}
-        style={{
-          transform: x.interpolate((x) => `translateX(${x})`),
-          boxShadow: y.interpolate((y) => `0px 0px 4px 0px rgb(0 0 0 / ${y})`),
-          ...props
-        }}
-      >
-        <Link
-          to={menuNames[i]}
-          onClick={() => setCurr(i)}>
-          <FontAwesomeIcon
-            icon={menuItems[i]}
-            inverse={i === current ? true : false}
-          />
-        </Link>
+    <>
+      <ul className='menu'>{springs.map(({
+        x, y, ...props
+      }, i) => (
+        <animated.li
+          className={`radius_menu ${i === current && cancelAnim ? 'selected ' : ''}`}
+          key={i}
+          style={{
+            transform: x.interpolate((x) => `translateX(${x})`),
+            boxShadow: y.interpolate((y) => `0px 0px 4px 0px rgb(0 0 0 / ${y})`),
+            ...props
+          }}
+        >
+          <Link
+            to={menuNames[i]}
+            onClick={() => setCurr(i)}>
+            <FontAwesomeIcon
+              icon={menuItems[i]}
+              inverse={i === current ? true : false}
+            />
+          </Link>
 
-      </animated.li>
-    ))}
-    </ul>
+        </animated.li>
+      ))}
+      </ul>
+      <Button
+        onClick={() => axios
+          .post('http://localhost:8000/accounts/login/', qs.stringify({
+            login: 'kozlo',
+            password: 'admin'
+          }))
+          .then((res) => console.log('success'))}>login
+      </Button>
+    </>
   )
 }
 

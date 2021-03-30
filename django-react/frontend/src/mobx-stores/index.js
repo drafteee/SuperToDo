@@ -5,6 +5,7 @@ import {
   configure
 } from 'mobx'
 import EnglishStore from './EnglishStore'
+import NotifyStore from './NotifyStore'
 
 
 configure({
@@ -14,6 +15,7 @@ configure({
 class RootStore {
   constructor() {
     this.englishStore = new EnglishStore(this)
+    this.notifyStore = new NotifyStore(this)
 
   }
 }
