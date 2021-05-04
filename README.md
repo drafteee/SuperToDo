@@ -1,4 +1,4 @@
-**Only Desctop Version**
+**Only Desktop Version**
 
 # SuperToDo
 
