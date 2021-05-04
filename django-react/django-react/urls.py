@@ -17,8 +17,7 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
 from rest_framework import routers                    # add this
-from languageDictionary.views import list_view, pair_create_view
-
+from languageDictionary import urls
 # router = routers.DefaultRouter()                      # add this
 # router.register(r'todos', views.TodoView, 'todo')
 # router.register(r'dictionaries', views.DictionaryView, 'dictionary')
@@ -26,7 +25,10 @@ from languageDictionary.views import list_view, pair_create_view
 urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
-    path('dictionary/', list_view),
-    path('dictionary/create/', pair_create_view),
+    # path('api/', include(router.urls))
+]
+
+urlpatterns += [
+    path('dictionary/', include(urls))
     # path('api/', include(router.urls))
 ]

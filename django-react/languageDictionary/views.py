@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.db.models import Count
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
-from .models import DictionaryPair
+from .models import DictionaryPair, Language
 # Create your views here.
 
 from .forms import DictionaryPairForm
@@ -35,8 +36,11 @@ def pair_detail(request, pairId, *args, **kwargs):
 
 
 @api_view(['GET'])
-def list_view(request, *args, **kwargs):
+def list_view(request, page=1, pageSize=10, *args, **kwargs):
+    print(page, pageSize)
     qs = DictionaryPair.objects.all()
+    # q = Language.objects.annotate(Count('dictionarypair')) 
+    # print(q[0].dictionarypair__count)
     serializer = DictionaryPairSerializer(qs, many=True)
 
     return Response(serializer.data)
@@ -47,7 +51,7 @@ def list_view(request, *args, **kwargs):
 # @permission_classes([IsAuthenticated])
 def pair_create_view(request, *args, **kwargs):
     serializer = DictionaryPairSerializer(data=request.POST)
-    print(serializer.is_valid(raise_exception=True), request.POST)
+    print(serializer.is_valid(raise_exception=True), request.POST) #use Forms for validation
 
     if serializer.is_valid(raise_exception=True):
         # serializer.save()
