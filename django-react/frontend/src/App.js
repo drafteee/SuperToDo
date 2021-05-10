@@ -40,6 +40,7 @@ import Menu from './containers/Menu'
 import ObserveInfo from './containers/ObserveInfo'
 import Routes from './routes'
 import './App.css'
+import ErrorBoundary from './components/ErrorBoundary'
 
 const {
   Content, Header
@@ -157,7 +158,7 @@ const App = ({
   return (
     <Layout
       style={{
-        height: '100vh',
+        minHeight: '100vh',
         background: 'none',
         overflow: 'hidden'
       }}>
@@ -204,8 +205,10 @@ const App = ({
             </Header>
             <Content className='main_content'>
               <ObserveInfo data={NotifyStore} />
-
+              <ErrorBoundary>
               <Routes />
+              </ErrorBoundary>
+              
             </Content>
           </div>
 

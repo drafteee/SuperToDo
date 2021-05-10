@@ -9,6 +9,7 @@ import {
   Row, Col, Form, Input, Button
 } from 'antd'
 import axios from 'axios'
+import ListLanguage from './List'
 const formItemLayout =
 {
   labelCol: {
@@ -37,11 +38,11 @@ const Language = (props) => {
 
   console.log(props)
   return (
-    <Row justify='center'>
+    <Row justify='space-around'>
       <Col span={16}>
-        List
+        <ListLanguage></ListLanguage>
       </Col>
-      <Col span={6}>
+      <Col span={6} offset={1}>
         <Form
           layout='vertical'
           form={form}
